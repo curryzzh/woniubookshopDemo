@@ -39,7 +39,7 @@
                 <div class="col-md-6">
                     <ol class="breadcrumb">
                         <li v-for="type in bookTypeList" >
-                            <a href="" >{{type.name}}</a>
+                            <a href="" @click.prevent="classify(type.id,type.name)">{{type.name}}</a>
                         </li>
 <!--                        <li >-->
 <!--                            <a href="" >历史</a>-->
@@ -105,6 +105,11 @@
             }
         },
         methods: {
+            classify(id,name){
+              sessionStorage.setItem("typeId",id);
+              sessionStorage.setItem("typeName",name);
+              publicHeaderVue.refreshPublicContent("/booksOfType")
+            },
             refreshPublicContent(url){
 
                 axios.get(url+".html")

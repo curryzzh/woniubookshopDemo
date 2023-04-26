@@ -39,5 +39,10 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
         return pageResult.getRecords();
     }
 
+    @Override
+    public List<Book> getBookByType(Integer typeId) {
+        return bookMapper.getBookByType(typeId);
+    }
+
 
 }

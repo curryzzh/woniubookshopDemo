@@ -1,13 +1,12 @@
 package com.woniuxy.qiantai.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniuxy.dal.entity.Book;
 import com.woniuxy.servicelayer.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +24,14 @@ public class BookController {
 
     @Autowired
     BookService bookService;
+    @RequestMapping("queryBooksByTypeId")
+    public List<Book> queryBooksByTypeId(Integer typeId, Integer currentPage, Integer pageSize) {
+        Page<Book> page = new Page<>(currentPage, pageSize);
+        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("typeId", typeId);
+        Page<Book> pageResult = bookService.page(page, queryWrapper);
+        return pageResult.getRecords();
+    }
 
 //    @RequestMapping()  //接收任意方式的请求
 //    @GetMapping //仅接受get请求
@@ -32,6 +39,10 @@ public class BookController {
     public List<Book> topN(Integer N){
 
         return bookService.topN(N);
+    }
+    @PostMapping("getBookByType")
+    public List<Book> getBookByType(Integer typeId){
+        return bookService.getBookByType(typeId);
     }
 
 
@@ -50,6 +61,7 @@ public class BookController {
 
         return currentBook;
     }
+
 
 
 }
