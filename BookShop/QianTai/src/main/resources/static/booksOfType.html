@@ -36,9 +36,9 @@
     <div class="row">
       <div class="col-md-12 col-md-offset-5 col-lg-offset-4col-xl-offset-5" >
         <ul class="pagination justify-content-center">
-          <li><a href="" @click.prevent="getBooks(--currentPage)" >上一页</a></li>
-          <li><a href="" >{{currentPage}}</a></li>
-          <li><a href="" @click.prevent="getBooks(++currentPage)" >下一页</a></li>
+          <li><a href="" @click.prevent=" currentPage > 1 ? getBooks(--currentPage):false " >上一页</a></li>
+          <li><a href="#">{{currentPage}}</a></li>
+          <li><a href="" @click.prevent="currentPage<maxPage?getBooks(++currentPage):false" >下一页</a></li>
         </ul>
       </div>
     </div>

@@ -24,12 +24,14 @@ public class BookController {
 
     @Autowired
     BookService bookService;
+
     @RequestMapping("queryBooksByTypeId")
     public List<Book> queryBooksByTypeId(Integer typeId, Integer currentPage, Integer pageSize) {
         Page<Book> page = new Page<>(currentPage, pageSize);
         QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("typeId", typeId);
         Page<Book> pageResult = bookService.page(page, queryWrapper);
+
         return pageResult.getRecords();
     }
 

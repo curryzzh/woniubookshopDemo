@@ -1,6 +1,7 @@
 package com.woniuxy.servicelayer.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniuxy.dal.entity.Book;
 import com.woniuxy.dal.mapper.BookMapper;
@@ -42,6 +43,11 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     @Override
     public List<Book> getBookByType(Integer typeId) {
         return bookMapper.getBookByType(typeId);
+    }
+
+    @Override
+    public IPage<Book> getBookByTypeTwo(Page<Book> page, Integer typeId) {
+        return bookMapper.getBookByTypeTwo(page, typeId);
     }
 
 
